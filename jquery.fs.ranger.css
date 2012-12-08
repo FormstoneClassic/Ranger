@@ -1,0 +1,24 @@
+/*
+ * Ranger Plugin [Formstone Library]
+ * @author Ben Plum
+ * @version 0.1
+ *
+ * Copyright © 2012 Ben Plum <mr@benplum.com>
+ * Released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
+ */
+ 
+ 	.ranger-element { left: -999999px; position: absolute; }
+ 	.ranger { overflow: hidden; width: 700px; }
+	.ranger .ranger-track { background: #fbfbfb; border: 1px solid #ddd; border-radius: 4px; float: left; height: 8px; margin: 10px 0; position: relative; width: 100%; }
+	.ranger .ranger-handle { background: #ccc; border: 1px solid #999; border-radius: 100%; cursor: pointer; display: block; height: 14px; left: 0; position: absolute; top: -4px; width: 14px; }
+	
+	/* Labels */
+	.ranger-labels .ranger-track { width: 80%; }
+	.ranger-labels .ranger-label { display: block; float: left; font-size: 12px; line-height: 28px; margin: 0 2% 0 0; text-align: right; width: 8%; }
+	.ranger-labels .ranger-label.max { float: right; margin: 0 0 0 2%; text-align: left; }
+	
+	.ranger-vertical { height: 300px; width: 30px; }
+	.ranger-vertical .ranger-track { height: 80%; margin: 0 11px 0; width: 8px; }
+	.ranger-vertical .ranger-handle { bottom: 0; left: -4px; top: auto; }
+	.ranger-vertical .ranger-label,
+	.ranger-vertical .ranger-label.max { float: none; height: 10%; text-align: center; width: 100%; }
