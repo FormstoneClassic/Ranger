@@ -46,20 +46,16 @@ if (jQuery) (function($) {
 				data = _data || $items.eq(i).data("ranger");
 				
 				if (typeof data != "undefined") {
+					data.stepCount = (data.max - data.min) / data.step;
 					if (data.vertical == true) {
 						data.trackHeight = data.$track.outerHeight();
 						data.handleHeight = data.$handle.outerHeight();
-						data.trackLimit = data.trackHeight - data.handleHeight;
-						data.percentLimit = data.trackLimit / data.trackHeight;
+						data.increment = data.trackHeight / data.stepCount;
 					} else {
 						data.trackWidth = data.$track.outerWidth();
 						data.handleWidth = data.$handle.outerWidth();
-						data.trackLimit = data.trackWidth - data.handleWidth;
-						data.percentLimit = data.trackLimit / data.trackWidth;
+						data.increment = data.trackWidth / data.stepCount;
 					}
-					
-					data.stepCount = (data.max - data.min) / data.step;
-					data.increment = data.trackLimit / data.stepCount;
 					
 					var perc = data.$input.val() / (data.max - data.min);
 					_position.apply(data.$input, [data, perc]);
@@ -134,7 +130,9 @@ if (jQuery) (function($) {
 			}
 			html += '">';
 			html += '<div class="ranger-track">';
-			html += '<span class="ranger-handle"></span>';
+			html += '<span class="ranger-handle">';
+			html += '<span class="ranger-disc"></span>';
+			html += '</span>';
 			html += '</div>';
 			html += '</div>';
 			
@@ -193,6 +191,8 @@ if (jQuery) (function($) {
 		
 		_onMouseMove(e);
 		
+		e.data.$ranger.addClass("focus");
+		
 		$("body").on("mousemove.ranger", e.data, _onMouseMove)
 				 .one("mouseup.ranger", e.data, _onMouseUp);
 	}
@@ -200,6 +200,8 @@ if (jQuery) (function($) {
 	function _onHandleDown(e) {
 		e.preventDefault();
 		e.stopPropagation();
+		
+		e.data.$ranger.addClass("focus");
 		
 		$("body").on("mousemove.ranger", e.data, _onMouseMove)
 				 .one("mouseup.ranger", e.data, _onMouseUp);
@@ -210,14 +212,16 @@ if (jQuery) (function($) {
 		var offset = data.$track.offset();
 		
 		if (data.vertical == true) {
-			var perc = data.percentLimit - ((e.pageY - offset.top) / data.trackLimit);
+			var perc = (e.pageY - offset.top) / data.trackHeight;
 		} else {
-			var perc = (e.pageX - offset.left) / data.trackLimit;
+			var perc = (e.pageX - offset.left) / data.trackWidth;
 		}
 		_position.apply(data.$input, [data, perc]);
 	}
 	
 	function _onMouseUp(e) {
+		e.data.$ranger.removeClass("focus");
+		
 		$("body").off("mousemove.ranger");
 	}
 	
@@ -233,8 +237,11 @@ if (jQuery) (function($) {
 	
 	function _position(data, perc) {
 		if (data.increment > 1) {
-			perc = (Math.round(perc * data.stepCount) * data.increment) / data.trackLimit;
-
+			if (data.vertical == true) {
+				perc = (Math.round(perc * data.stepCount) * data.increment) / data.trackHeight;
+			} else {
+				perc = (Math.round(perc * data.stepCount) * data.increment) / data.trackWidth;
+			}
 		}
 		if (perc < 0) perc = 0;
 		if (perc > 1) perc = 1;
@@ -242,11 +249,11 @@ if (jQuery) (function($) {
 		var value = ((data.min - data.max) * perc);
 		value = -parseFloat( value.toFixed(data.stepDigits) );
 		
-		perc *= data.percentLimit;
+		//perc *= data.percentLimit;
 		
 		if (data.vertical == true) {
-			data.$handle.css({ bottom: ((perc) * 100) + "%" });
-			value += data.min;
+			data.$handle.css({ bottom: ((1 - perc) * 100) + "%" });
+			value = data.min + (data.max - value);
 		} else {
 			data.$handle.css({ left: (perc * 100) + "%" });
 			value += data.min;
