@@ -13,10 +13,13 @@
 	.ranger .ranger-handle { display: block; height: 100%; left: 0; position: absolute; top: 0; width: 1px; }
 	.ranger .ranger-disc { background: #DCDCDC; border: 1px solid #AFAFAF; border-radius: 100%; cursor: pointer; display: block; height: 14px; margin: -4px 0 0 -6px; width: 14px; }
 	
-	.ranger.focus .ranger-track,
-	.ranger:hover .ranger-track { box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1); }
-	.ranger.focus .ranger-disc,
-	.ranger:hover .ranger-disc { background: #ccc; border-color: #999; box-shadow: 0 0 3px rgba(0, 0, 0, 0.25); }
+	@media screen and (min-width: 740px) {
+		.ranger:hover .ranger-track { box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1); }
+		.ranger:hover .ranger-disc { background: #ccc; border-color: #999; box-shadow: 0 0 3px rgba(0, 0, 0, 0.25); }
+	}
+	
+	.ranger.focus .ranger-track { box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1); }
+	.ranger.focus .ranger-disc { background: #ccc; border-color: #999; box-shadow: 0 0 3px rgba(0, 0, 0, 0.25); }
 	
 	/* Labels */
 	.ranger-labels .ranger-track { width: 80%; }
