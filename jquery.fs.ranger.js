@@ -1,7 +1,7 @@
 /*
  * Ranger Plugin [Formstone Library]
  * @author Ben Plum
- * @version 0.1.3
+ * @version 0.1.4
  *
  * Copyright © 2013 Ben Plum <mr@benplum.com>
  * Released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
@@ -94,83 +94,90 @@ if (jQuery) (function($) {
 	
 	// Initialize
 	function _init(opts) {
-		opts = opts || {};
-		
-		// Define settings
-		var settings = $.extend({}, options, opts);
+		// Settings
+		opts = $.extend({}, options, opts);
 		
 		// Apply to each element
-		return $(this).each(function(i) {
-			var $input = $(this);
-			if (!$input.data("ranger")) {
-				var min = parseFloat($input.attr("min")) || 0,
-					max = parseFloat($input.attr("max")) || 100,
-					step = parseFloat($input.attr("step")) || 1,
-					value = $input.val() || (min + ((max - min) / 2));
-				
-				var html = '<div class="ranger';
-				if (settings.vertical) {
-					html += ' ranger-vertical';
-				}
-				if (settings.labels) {
-					html += ' ranger-labels';
-				}
-				html += '">';
-				html += '<div class="ranger-track">';
-				html += '<span class="ranger-handle">';
-				html += '<span class="ranger-disc"></span>';
-				html += '</span>';
-				html += '</div>';
-				html += '</div>';
-				
-				// Modify DOM
-				$input.addClass("ranger-element")
-					  .after(html);
-				
-				// Store plugin data
-				var $ranger = $input.next(".ranger");
-				var $track = $ranger.find(".ranger-track");
-				var $handle = $ranger.find(".ranger-handle");
-				var $output = $ranger.find(".ranger-output");
-				
-				if (settings.labels) {
-					if (settings.vertical) {
-						$ranger.prepend('<span class="ranger-label max">' + ((settings.labelMax) ? settings.labelMax : max) + '</span>')
-							   .append('<span class="ranger-label min">' + ((settings.labelMin) ? settings.labelMin : min) + '</span>');
-					} else {
-						$ranger.prepend('<span class="ranger-label min">' + ((settings.labelMin) ? settings.labelMin : min) + '</span>')
-							   .append('<span class="ranger-label max">' + ((settings.labelMax) ? settings.labelMax : max) + '</span>');
-					}
-				}
-				
-				// Check disabled
-				if ($ranger.is(":disabled")) {
-					$ranger.addClass("disabled");
-				}
-				
-				var data = $.extend({
-					$input: $input,
-					$ranger: $ranger,
-					$track: $track,
-					$handle: $handle,
-					$output: $output,
-					min: min,
-					max: max,
-					step: step,
-					stepDigits: step.toString().length - step.toString().indexOf(".")
-				}, settings);
-				
-				// Bind click events
-				$input.on("focus.ranger", data, _onFocus)
-					  .on("blur.ranger", data, _onBlur);
-				
-				$ranger.on("mousedown.ranger", ".ranger-track", data, _onTrackDown)
-					   .on("mousedown.ranger", ".ranger-handle", data, _onHandleDown)
-					   .data("ranger", data);
-				
-				pub.reset.apply($input, [data]);
+		var $items = $(this);
+		for (var i = 0, count = $items.length; i < count; i++) {
+			_build($items.eq(i), opts);
+		}
+		return $items;
+	}
+	
+	// Build
+	function _build($input, opts) {
+		if (!$input.data("ranger")) {
+			// EXTEND OPTIONS
+			$.extend(opts, $input.data("ranger-options"));
+			
+			var min = parseFloat($input.attr("min")) || 0,
+				max = parseFloat($input.attr("max")) || 100,
+				step = parseFloat($input.attr("step")) || 1,
+				value = $input.val() || (min + ((max - min) / 2));
+			
+			var html = '<div class="ranger';
+			if (opts.vertical) {
+				html += ' ranger-vertical';
 			}
-		});
+			if (opts.labels) {
+				html += ' ranger-labels';
+			}
+			html += '">';
+			html += '<div class="ranger-track">';
+			html += '<span class="ranger-handle">';
+			html += '<span class="ranger-disc"></span>';
+			html += '</span>';
+			html += '</div>';
+			html += '</div>';
+			
+			// Modify DOM
+			$input.addClass("ranger-element")
+				  .after(html);
+			
+			// Store plugin data
+			var $ranger = $input.next(".ranger");
+			var $track = $ranger.find(".ranger-track");
+			var $handle = $ranger.find(".ranger-handle");
+			var $output = $ranger.find(".ranger-output");
+			
+			if (opts.labels) {
+				if (opts.vertical) {
+					$ranger.prepend('<span class="ranger-label max">' + ((opts.labelMax) ? opts.labelMax : max) + '</span>')
+						   .append('<span class="ranger-label min">' + ((opts.labelMin) ? opts.labelMin : min) + '</span>');
+				} else {
+					$ranger.prepend('<span class="ranger-label min">' + ((opts.labelMin) ? opts.labelMin : min) + '</span>')
+						   .append('<span class="ranger-label max">' + ((opts.labelMax) ? opts.labelMax : max) + '</span>');
+				}
+			}
+			
+			// Check disabled
+			if ($ranger.is(":disabled")) {
+				$ranger.addClass("disabled");
+			}
+			
+			opts = $.extend({
+				$input: $input,
+				$ranger: $ranger,
+				$track: $track,
+				$handle: $handle,
+				$output: $output,
+				min: min,
+				max: max,
+				step: step,
+				stepDigits: step.toString().length - step.toString().indexOf(".")
+			}, opts);
+			
+			// Bind click events
+			$input.on("focus.ranger", opts, _onFocus)
+				  .on("blur.ranger", opts, _onBlur);
+			
+			$ranger.on("mousedown.ranger", ".ranger-track", opts, _onTrackDown)
+				   .on("mousedown.ranger", ".ranger-handle", opts, _onHandleDown)
+				   .data("ranger", opts);
+			
+			pub.reset.apply($input, [opts]);
+		}
 	}
 	
 	// Handle track click
