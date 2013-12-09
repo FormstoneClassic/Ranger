@@ -1,6 +1,6 @@
 {
 	"name": "Ranger",
-	"version": "0.4.0",
+	"version": "0.1.5",
 	"description": "A jQuery plugin for cross browser range inputs. Part of the formstone library.",
 	"keywords": [
 		"javascript",

@@ -1,7 +1,7 @@
 /*
  * Ranger Plugin [Formstone Library]
  * @author Ben Plum
- * @version 0.1.4
+ * @version 0.1.5
  *
  * Copyright © 2013 Ben Plum <mr@benplum.com>
  * Released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
@@ -11,7 +11,9 @@ if (jQuery) (function($) {
 	
 	// Default Options
 	var options = {
+		callback: $.noop,
 		customClass: "",
+		formatter: null,
 		labels: true,
 		labelMin: false,
 		labelMax: false,
@@ -111,6 +113,10 @@ if (jQuery) (function($) {
 			// EXTEND OPTIONS
 			$.extend(opts, $input.data("ranger-options"));
 			
+			if (!opts.formatter) {
+				opts.formatter = _formatNumber;
+			}
+			
 			var min = parseFloat($input.attr("min")) || 0,
 				max = parseFloat($input.attr("max")) || 100,
 				step = parseFloat($input.attr("step")) || 1,
@@ -136,18 +142,18 @@ if (jQuery) (function($) {
 				  .after(html);
 			
 			// Store plugin data
-			var $ranger = $input.next(".ranger");
-			var $track = $ranger.find(".ranger-track");
-			var $handle = $ranger.find(".ranger-handle");
-			var $output = $ranger.find(".ranger-output");
+			var $ranger = $input.next(".ranger"),
+				$track = $ranger.find(".ranger-track"),
+				$handle = $ranger.find(".ranger-handle"),
+				$output = $ranger.find(".ranger-output");
 			
 			if (opts.labels) {
 				if (opts.vertical) {
-					$ranger.prepend('<span class="ranger-label max">' + ((opts.labelMax) ? opts.labelMax : max) + '</span>')
-						   .append('<span class="ranger-label min">' + ((opts.labelMin) ? opts.labelMin : min) + '</span>');
+					$ranger.prepend('<span class="ranger-label max">' + opts.formatter.call(this, (opts.labelMax) ? opts.labelMax : max) + '</span>')
+						   .append('<span class="ranger-label min">' + opts.formatter.call(this, (opts.labelMin) ? opts.labelMin : min) + '</span>');
 				} else {
-					$ranger.prepend('<span class="ranger-label min">' + ((opts.labelMin) ? opts.labelMin : min) + '</span>')
-						   .append('<span class="ranger-label max">' + ((opts.labelMax) ? opts.labelMax : max) + '</span>');
+					$ranger.prepend('<span class="ranger-label min">' + opts.formatter.call(this, (opts.labelMin) ? opts.labelMin : min) + '</span>')
+						   .append('<span class="ranger-label max">' + opts.formatter.call(this, (opts.labelMax) ? opts.labelMax : max) + '</span>');
 				}
 			}
 			
@@ -165,12 +171,14 @@ if (jQuery) (function($) {
 				min: min,
 				max: max,
 				step: step,
-				stepDigits: step.toString().length - step.toString().indexOf(".")
+				stepDigits: step.toString().length - step.toString().indexOf("."),
+				value: value
 			}, opts);
 			
 			// Bind click events
 			$input.on("focus.ranger", opts, _onFocus)
-				  .on("blur.ranger", opts, _onBlur);
+				  .on("blur.ranger", opts, _onBlur)
+				  .on("change.ranger input.ranger", opts, _onChange);
 			
 			$ranger.on("mousedown.ranger", ".ranger-track", opts, _onTrackDown)
 				   .on("mousedown.ranger", ".ranger-handle", opts, _onHandleDown)
@@ -259,7 +267,24 @@ if (jQuery) (function($) {
 			value += data.min;
 		}
 		
-		data.$input.val(value);
+		if (value != data.value) {
+			data.$input.val(value)
+					   .trigger("change", [ true ]);
+			
+			data.callback.call(data.$ranger, value);
+			
+			data.value = value;
+		}
+	}
+	
+	function _onChange(e, internal) {
+		//console.log(e, internal);
+	}
+	
+	function _formatNumber(number) {
+		var parts = number.toString().split(".");
+		parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		return parts.join(".");
 	}
 	
 	// Define Plugin
