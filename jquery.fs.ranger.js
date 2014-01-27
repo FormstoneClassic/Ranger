@@ -1,5 +1,5 @@
 /* 
- * Ranger v3.0.0 - 2014-01-20 
+ * Ranger v3.0.0 - 2014-01-27 
  * A jQuery plugin for cross browser range inputs. Part of the formstone library. 
  * http://formstone.it/ranger/ 
  * 
@@ -17,7 +17,7 @@
 	 * @param label [boolean] <true> "Draw labels"
 	 * @param labels.max [string] "Max value label; defaults to max value"
 	 * @param labels.min [string] "Min value label; defaults to min value"
-	 * @param vertical [boolean] <false> "Flag to rander vertical range"
+	 * @param vertical [boolean] <false> "Flag to render vertical range"
 	 */
 	var options = {
 		callback: $.noop,

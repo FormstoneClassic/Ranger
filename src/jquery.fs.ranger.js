@@ -9,7 +9,7 @@
 	 * @param label [boolean] <true> "Draw labels"
 	 * @param labels.max [string] "Max value label; defaults to max value"
 	 * @param labels.min [string] "Min value label; defaults to min value"
-	 * @param vertical [boolean] <false> "Flag to rander vertical range"
+	 * @param vertical [boolean] <false> "Flag to render vertical range"
 	 */
 	var options = {
 		callback: $.noop,
