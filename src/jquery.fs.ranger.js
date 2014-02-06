@@ -48,7 +48,7 @@
 				var $input = $(input),
 					data = $input.data("ranger");
 
-				if (data !== null) {
+				if (data) {
 					data.$ranger.off(".ranger")
 								.remove();
 
@@ -70,7 +70,7 @@
 				var $input = $(input),
 					data = $input.data("ranger");
 
-				if (data !== null) {
+				if (data) {
 					data.$input.prop("disabled", true);
 					data.$ranger.addClass("disabled");
 				}
@@ -88,7 +88,7 @@
 				var $input = $(input),
 					data = $input.data("ranger");
 
-				if (data !== null) {
+				if (data) {
 					data.$input.prop("disabled", false);
 					data.$ranger.removeClass("disabled");
 				}
@@ -106,7 +106,7 @@
 				var $input = $(input),
 					data = $input.data("ranger");
 
-				if (data !== null) {
+				if (data) {
 					data.stepCount = (data.max - data.min) / data.step;
 					if (data.vertical) {
 						data.trackHeight = data.$track.outerHeight();

@@ -1,5 +1,5 @@
 /* 
- * Ranger v3.0.1 - 2014-01-29 
+ * Ranger v3.0.2 - 2014-02-06 
  * A jQuery plugin for cross browser range inputs. Part of the formstone library. 
  * http://formstone.it/ranger/ 
  * 
@@ -56,7 +56,7 @@
 				var $input = $(input),
 					data = $input.data("ranger");
 
-				if (data !== null) {
+				if (data) {
 					data.$ranger.off(".ranger")
 								.remove();
 
@@ -78,7 +78,7 @@
 				var $input = $(input),
 					data = $input.data("ranger");
 
-				if (data !== null) {
+				if (data) {
 					data.$input.prop("disabled", true);
 					data.$ranger.addClass("disabled");
 				}
@@ -96,7 +96,7 @@
 				var $input = $(input),
 					data = $input.data("ranger");
 
-				if (data !== null) {
+				if (data) {
 					data.$input.prop("disabled", false);
 					data.$ranger.removeClass("disabled");
 				}
@@ -114,7 +114,7 @@
 				var $input = $(input),
 					data = $input.data("ranger");
 
-				if (data !== null) {
+				if (data) {
 					data.stepCount = (data.max - data.min) / data.step;
 					if (data.vertical) {
 						data.trackHeight = data.$track.outerHeight();
