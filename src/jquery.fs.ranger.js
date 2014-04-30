@@ -162,7 +162,7 @@
 			var min = parseFloat($input.attr("min")) || 0,
 				max = parseFloat($input.attr("max")) || 100,
 				step = parseFloat($input.attr("step")) || 1,
-				value = $input.val() || (min + ((max - min) / 2));
+				value = parseFloat($input.val()) || (min + ((max - min) / 2));
 
 			var html = '<div class="ranger';
 			if (opts.vertical) {
