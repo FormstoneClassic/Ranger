@@ -1,5 +1,5 @@
 /* 
- * Ranger v3.0.3 - 2014-04-30 
+ * Ranger v3.0.4 - 2014-05-29 
  * A jQuery plugin for cross browser range inputs. Part of the formstone library. 
  * http://formstone.it/ranger/ 
  * 
@@ -126,7 +126,7 @@
 						data.increment = data.trackWidth / data.stepCount;
 					}
 
-					var perc = data.$input.val() / (data.max - data.min);
+					var perc = (data.$input.val() - data.min) / (data.max - data.min);
 					_position(data, perc);
 				}
 			});

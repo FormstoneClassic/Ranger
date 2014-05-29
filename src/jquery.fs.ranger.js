@@ -118,7 +118,7 @@
 						data.increment = data.trackWidth / data.stepCount;
 					}
 
-					var perc = data.$input.val() / (data.max - data.min);
+					var perc = (data.$input.val() - data.min) / (data.max - data.min);
 					_position(data, perc);
 				}
 			});
