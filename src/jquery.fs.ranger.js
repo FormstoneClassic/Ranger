@@ -119,7 +119,7 @@
 					}
 
 					var perc = (data.$input.val() - data.min) / (data.max - data.min);
-					_position(data, perc);
+					_position(data, perc, true); // isReset
 				}
 			});
 		}
@@ -330,8 +330,9 @@
 	 * @description Positions handle
 	 * @param data [object] "Instance Data"
 	 * @param perc [number] "Position precentage"
+	 * @param isReset [boolean] "Called from reset"
 	 */
-	function _position(data, perc) {
+	function _position(data, perc, isReset) {
 		if (data.increment > 1) {
 			if (data.vertical) {
 				perc = (Math.round(perc * data.stepCount) * data.increment) / data.trackHeight;
@@ -353,7 +354,7 @@
 		data.$handle.css((data.vertical) ? "bottom" : "left", (perc * 100) + "%");
 		value += data.min;
 
-		if (value !== data.value) {
+		if (value !== data.value && isReset !== true) {
 			data.$input.val(value)
 					   .trigger("change", [ true ]);
 
