@@ -23,9 +23,7 @@
 
 		<script>
 			$(document).ready(function() {
-				$("input[type=range]").ranger().on("change", function() {
-					console.log('sdsd');
-				});
+				$("input[type=range]").ranger();
 
 				$(window).on("snap", function() {
 					$("input[type=range]").ranger("reset");
