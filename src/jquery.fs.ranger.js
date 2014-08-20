@@ -282,9 +282,17 @@
 			perc = 0;
 
 		if (data.vertical) {
-			perc = 1 - (e.pageY - offset.top) / data.trackHeight;
+			var pageY = e.pageY;
+			if (pageY === undefined) {
+				pageY = e.originalEvent.touches[0].pageY;
+			}
+			perc = 1 - (pageY - offset.top) / data.trackHeight;
 		} else {
-			perc = (e.pageX - offset.left) / data.trackWidth;
+			var pageX = e.pageX;
+			if (pageX === undefined) {
+				pageX = e.originalEvent.touches[0].pageX;
+			}
+			perc = (pageX - offset.left) / data.trackWidth;
 		}
 
 		_position(data, perc);
