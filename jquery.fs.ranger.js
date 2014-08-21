@@ -1,5 +1,5 @@
 /* 
- * Ranger v3.0.7 - 2014-08-21 
+ * Ranger v3.0.8 - 2014-08-21 
  * A jQuery plugin for cross browser range inputs. Part of the formstone library. 
  * http://formstone.it/ranger/ 
  * 
@@ -16,7 +16,7 @@
 	 * @param label [boolean] <true> "Draw labels"
 	 * @param labels.max [string] "Max value label; defaults to max value"
 	 * @param labels.min [string] "Min value label; defaults to min value"
-	 * @param vertical [boolean] <false> "Flag to render vertical range; Deprecated use 'orientation' attribute instead"
+	 * @param vertical [boolean] <false> "Flag to render vertical range; Deprecated use 'orientation' attribute instead
 	 */
 	var options = {
 		customClass: "",
@@ -170,6 +170,9 @@
 				step = parseFloat($input.attr("step")) || 1,
 				value = parseFloat($input.val()) || (min + ((max - min) / 2));
 
+			// Not valid in the spec
+			opts.vertical = $input.attr("orient") === "vertical" || opts.vertical;
+
 			var html = '<div class="ranger';
 			if (opts.vertical) {
 				html += ' ranger-vertical';
@@ -210,7 +213,7 @@
 				$ranger.addClass("disabled");
 			}
 
-			var data = $.extend(opts, {
+			var data = $.extend({}, opts, {
 				$input: $input,
 				$ranger: $ranger,
 				$track: $track,
