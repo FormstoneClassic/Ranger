@@ -1,4 +1,4 @@
- 	.ranger-element { *left: -9999px; opacity: 0; position: absolute; z-index: -1; }
+ 	.ranger-element { *left: -9999px; height: 1px; opacity: 0; position: absolute; z-index: -1; width: 1px; }
  	.ranger { overflow: hidden; width: 100%; }
  	.ranger * {
 	 	-webkit-user-select: none;

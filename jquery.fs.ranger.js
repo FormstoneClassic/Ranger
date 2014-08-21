@@ -1,5 +1,5 @@
 /* 
- * Ranger v3.0.5 - 2014-08-20 
+ * Ranger v3.0.7 - 2014-08-21 
  * A jQuery plugin for cross browser range inputs. Part of the formstone library. 
  * http://formstone.it/ranger/ 
  * 
@@ -210,7 +210,7 @@
 				$ranger.addClass("disabled");
 			}
 
-			var data = $.extend({
+			var data = $.extend(opts, {
 				$input: $input,
 				$ranger: $ranger,
 				$track: $track,
@@ -221,7 +221,7 @@
 				step: step,
 				stepDigits: step.toString().length - step.toString().indexOf("."),
 				value: value
-			}, opts);
+			});
 
 			// Bind click events
 			$input.on("focus.ranger", data, _onFocus)
@@ -243,6 +243,7 @@
 	 * @param e [object] "Event data"
 	 */
 	function _onTrackDown(e) {
+		e.preventDefault();
 		e.stopPropagation();
 
 		var data = e.data;
@@ -264,6 +265,7 @@
 	 * @param e [object] "Event data"
 	 */
 	function _onHandleDown(e) {
+		e.preventDefault();
 		e.stopPropagation();
 
 		var data = e.data;
@@ -283,14 +285,20 @@
 	 * @param e [object] "Event data"
 	 */
 	function _onMouseMove(e) {
-		var data = e.data,
+		e.preventDefault();
+		e.stopPropagation();
+
+		var oe = e.originalEvent,
+			data = e.data,
 			offset = data.$track.offset(),
 			perc = 0;
 
 		if (data.vertical) {
-			perc = 1 - (e.pageY - offset.top) / data.trackHeight;
+			var pageY = (typeof oe.targetTouches !== "undefined") ? oe.targetTouches[0].pageY : e.pageY;
+			perc = 1 - (pageY - offset.top) / data.trackHeight;
 		} else {
-			perc = (e.pageX - offset.left) / data.trackWidth;
+			var pageX = (typeof oe.targetTouches !== "undefined") ? oe.targetTouches[0].pageX : e.pageX;
+			perc = (pageX - offset.left) / data.trackWidth;
 		}
 
 		_position(data, perc);
@@ -303,6 +311,9 @@
 	 * @param e [object] "Event data"
 	 */
 	function _onMouseUp(e) {
+		e.preventDefault();
+		e.stopPropagation();
+
 		var data = e.data;
 
 		data.$ranger.removeClass("focus");
