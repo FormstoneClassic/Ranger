@@ -277,20 +277,21 @@
 	function _onMouseMove(e) {
 		var data = e.data,
 			offset = data.$track.offset(),
-			perc = 0;
+			perc = 0,
+			$disk = data.$track.find('.ranger-disc');
 
 		if (data.vertical) {
 			var pageY = e.pageY;
 			if (pageY === undefined) {
 				pageY = e.originalEvent.touches[0].pageY;
 			}
-			perc = 1 - (pageY - offset.top) / data.trackHeight;
+			perc = 1 - (pageY - offset.top - $disk.height()) / data.trackHeight;
 		} else {
 			var pageX = e.pageX;
 			if (pageX === undefined) {
 				pageX = e.originalEvent.touches[0].pageX;
 			}
-			perc = (pageX - offset.left) / data.trackWidth;
+			perc = (pageX - offset.left - $disk.width()) / data.trackWidth;
 		}
 
 		_position(data, perc);
