@@ -1,6 +1,6 @@
 {
   "name": "ranger",
-  "version": "3.0.8",
+  "version": "3.0.9",
   "title": "Ranger",
   "author": {
     "name": "Ben Plum",
@@ -23,12 +23,11 @@
     "ui",
     "javascript",
     "jquery",
-    "formstone",
-    "benplum"
+    "formstone"
   ],
   "docs": "http://formstone.it/ranger/",
   "demo": "http://formstone.it/ranger/",
-  "download": "https://github.com/benplum/Ranger",
-  "bugs": "https://github.com/benplum/Ranger/issues",
+  "download": "https://github.com/Formstone/Ranger",
+  "bugs": "https://github.com/Formstone/Ranger/issues",
   "homepage": "http://formstone.it/ranger/"
 }

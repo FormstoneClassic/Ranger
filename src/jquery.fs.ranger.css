@@ -4,7 +4,6 @@
 	 	-webkit-user-select: none;
 		   -moz-user-select: none;
 		    -ms-user-select: none;
-		     -o-user-select: none;
 		        user-select: none;
  	}
 	.ranger .ranger-track { background: #fbfbfb; border: 1px solid #ddd; border-radius: 4px; float: left; height: 8px; margin: 10px 0; position: relative; width: 100%; }
