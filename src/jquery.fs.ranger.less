@@ -1,0 +1,151 @@
+ 	.ranger-element {
+ 		height: 1px;
+ 		opacity: 0;
+ 		position: absolute;
+ 		width: 1px;
+ 		z-index: -1;
+
+ 		.no-touch & {
+	 		left: -9999px;
+ 		}
+ 	}
+
+ 	.ranger {
+ 		overflow: hidden;
+ 		width: 100%;
+
+ 		* {
+ 			user-select: none;
+ 		}
+
+ 		.ranger-track {
+ 			background: #fbfbfb;
+ 			border: 1px solid #ddd;
+ 			border-radius: 4px;
+ 			float: left;
+ 			height: 8px;
+ 			margin: 10px 0;
+ 			position: relative;
+ 			width: 100%;
+ 		}
+
+ 		.ranger-handle {
+ 			display: block;
+ 			height: 100%;
+ 			left: 0;
+ 			position: absolute;
+ 			top: 0;
+ 			width: 1px;
+ 		}
+
+ 		// .ranger-disc - deprecated
+ 		.ranger-marker {
+ 			background: #DCDCDC;
+ 			border: 1px solid #AFAFAF;
+ 			border-radius: 100%;
+ 			cursor: pointer;
+ 			display: block;
+ 			height: 14px;
+ 			margin: -4px 0 0 -6px;
+ 			width: 14px;
+ 		}
+
+		.no-touch &:hover .ranger-track {
+			box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
+		}
+
+		.no-touch &:hover .ranger-disc {
+			background: #ccc;
+			border-color: #999;
+			box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+		}
+
+		// Focus
+		&.focus {
+			.ranger-track {
+				box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
+			}
+
+			.ranger-marker {
+				background: #ccc;
+				border-color: #999;
+				box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+			}
+		}
+
+		// Labels
+		&.ranger-labels {
+			.ranger-track {
+				width: 80%;
+			}
+
+			.ranger-label {
+				display: block;
+				font-size: 12px;
+				line-height: 28px;
+				width: 8%;
+
+				&.min {
+					float: left;
+					margin: 0 2% 0 0;
+					text-align: right;
+				}
+
+				&.max {
+					float: right;
+					margin: 0 0 0 2%;
+					text-align: left;
+				}
+			}
+		}
+
+		// Vertical
+		&.ranger-vertical {
+			height: 300px;
+			width: 30px;
+
+			.ranger-track {
+				height: 75%;
+				margin: 0 11px 0;
+				width: 8px;
+			}
+
+			.ranger-handle {
+				bottom: 0;
+				height: 1px;
+				left: 0;
+				top: auto;
+				width: 100%;
+			}
+
+			.ranger-disc {
+				margin: -7px 0 0 -4px;
+			}
+
+			.ranger-label {
+				clear: both;
+				float: none;
+				height: 10%;
+				text-align: center;
+				width: 100%;
+
+				&.min {
+					padding: 5px 0 0;
+				}
+
+				&.max {
+					padding: 0;
+				}
+			}
+		}
+
+		// Disabled
+		&.disabled {
+			cursor: default;
+			opacity: 0.5;
+
+			.ranger-disc {
+				cursor: default;
+			}
+		}
+	}

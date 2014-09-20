@@ -175,7 +175,7 @@
 			html += '">';
 			html += '<div class="ranger-track">';
 			html += '<span class="ranger-handle">';
-			html += '<span class="ranger-disc"></span>';
+			html += '<span class="ranger-marker"></span>';
 			html += '</span>';
 			html += '</div>';
 			html += '</div>';
