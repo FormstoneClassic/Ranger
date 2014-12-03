@@ -374,7 +374,7 @@
 		data.$handle.css((data.vertical) ? "bottom" : "left", (perc * 100) + "%");
 		value += data.min;
 
-		if (value !== data.value && value && isReset !== true) {
+		if (value !== data.value && isReset !== true) {
 			data.$input.val(value)
 					   .trigger("change", [ true ]);
 
