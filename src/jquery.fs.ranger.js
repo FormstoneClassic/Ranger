@@ -192,11 +192,11 @@
 
 			if (opts.label) {
 				if (opts.vertical) {
-					$ranger.prepend('<span class="ranger-label max">' + opts.formatter.call(this, (opts.labelMax) ? opts.labelMax : max) + '</span>')
-						   .append('<span class="ranger-label min">' + opts.formatter.call(this, (opts.labelMin) ? opts.labelMin : min) + '</span>');
+					$ranger.prepend('<span class="ranger-label max">' + opts.formatter.call(this, (opts.labels.max) ? opts.labels.max : max) + '</span>')
+						   .append('<span class="ranger-label min">' + opts.formatter.call(this, (opts.labels.min) ? opts.labels.min : min) + '</span>');
 				} else {
-					$ranger.prepend('<span class="ranger-label min">' + opts.formatter.call(this, (opts.labelMin) ? opts.labelMin : min) + '</span>')
-						   .append('<span class="ranger-label max">' + opts.formatter.call(this, (opts.labelMax) ? opts.labelMax : max) + '</span>');
+					$ranger.prepend('<span class="ranger-label min">' + opts.formatter.call(this, (opts.labels.min) ? opts.labels.min : min) + '</span>')
+						   .append('<span class="ranger-label max">' + opts.formatter.call(this, (opts.labels.max) ? opts.labels.max : max) + '</span>');
 				}
 			}
 
