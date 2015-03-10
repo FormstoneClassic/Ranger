@@ -7,4 +7,4 @@ A jQuery plugin for cross browser range inputs. Part of the formstone library.
 - [Documentation](http://formstone.it/ranger/) 
 
 #### Bower Support 
-`bower install Ranger`
+`bower install Ranger` 

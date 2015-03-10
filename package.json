@@ -24,6 +24,9 @@
     "email": "mr@benplum.com",
     "url": "http://www.benplum.com"
   },
+  "dependencies": {
+    "jquery": ">= 1.11.0"
+  },
   "devDependencies": {
     "grunt-autoprefixer": "^1.0.1",
     "grunt-banner": "^0.2.3",
