@@ -1,7 +1,7 @@
 /* 
- * Ranger v3.1.1 - 2015-03-10 
+ * Ranger v3.1.1 - 2015-04-04 
  * A jQuery plugin for cross browser range inputs. Part of the formstone library. 
- * http://formstone.it/ranger/ 
+ * http://classic.formstone.it/ranger/ 
  * 
  * Copyright 2015 Ben Plum; MIT Licensed 
  */

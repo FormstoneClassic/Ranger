@@ -14,10 +14,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Formstone/Ranger"
+    "url": "https://github.com/FormstoneClassic/Ranger"
   },
-  "homepage": "http://formstone.it/ranger/",
-  "demo": "http://formstone.it/components/Ranger/demo/index.html",
+  "homepage": "http://classic.formstone.it/ranger/",
+  "demo": "http://classic.formstone.it/components/Ranger/demo/index.html",
   "license": "MIT",
   "author": {
     "name": "Ben Plum",

@@ -25,9 +25,9 @@
     "jquery",
     "formstone"
   ],
-  "docs": "http://formstone.it/ranger/",
-  "demo": "http://formstone.it/ranger/",
-  "download": "https://github.com/Formstone/Ranger",
-  "bugs": "https://github.com/Formstone/Ranger/issues",
-  "homepage": "http://formstone.it/ranger/"
+  "docs": "http://classic.formstone.it/ranger/",
+  "demo": "http://classic.formstone.it/ranger/",
+  "download": "https://github.com/FormstoneClassic/Ranger",
+  "bugs": "https://github.com/FormstoneClassic/Ranger/issues",
+  "homepage": "http://classic.formstone.it/ranger/"
 }

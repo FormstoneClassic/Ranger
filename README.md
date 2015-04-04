@@ -3,8 +3,8 @@
 
 A jQuery plugin for cross browser range inputs. Part of the formstone library. 
 
-- [Demo](http://formstone.it/components/Ranger/demo/index.html) 
-- [Documentation](http://formstone.it/ranger/) 
+- [Demo](http://classic.formstone.it/components/Ranger/demo/index.html) 
+- [Documentation](http://classic.formstone.it/ranger/) 
 
 #### Bower Support 
 `bower install Ranger` 

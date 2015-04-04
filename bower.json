@@ -12,7 +12,7 @@
     "benplum"
   ],
   "license": "MIT",
-  "homepage": "http://formstone.it/ranger/",
+  "homepage": "http://classic.formstone.it/ranger/",
   "main": [
     "jquery.fs.ranger.js",
     "jquery.fs.ranger.css"
