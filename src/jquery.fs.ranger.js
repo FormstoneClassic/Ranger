@@ -157,10 +157,19 @@
 				opts.formatter = _formatNumber;
 			}
 
-			var min = parseFloat($input.attr("min")) || 0,
-				max = parseFloat($input.attr("max")) || 100,
+			var min = parseFloat($input.attr("min")),
+				max = parseFloat($input.attr("max")),
 				step = parseFloat($input.attr("step")) || 1,
-				value = parseFloat($input.val()) || (min + ((max - min) / 2));
+				value = parseFloat($input.val());
+			if (isNaN(min)) {
+				min	= 0;
+			}
+			if (isNaN(max)) {
+				max	= 100;
+			}
+			if (isNaN(value)) {
+				value	= min + (max - min) / 2;
+			}
 
 			// Not valid in the spec
 			opts.vertical = $input.attr("orient") === "vertical" || opts.vertical;
